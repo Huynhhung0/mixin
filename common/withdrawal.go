@@ -6,6 +6,7 @@ import (
 	"github.com/MixinNetwork/mixin/config"
 	"github.com/MixinNetwork/mixin/crypto"
 	"github.com/MixinNetwork/mixin/domains/ethereum"
+	"github.com/MixinNetwork/mixin/domains/tron"
 )
 
 type WithdrawalData struct {
@@ -64,6 +65,8 @@ func (tx *SignedTransaction) validateWithdrawalSubmit(inputs map[string]*UTXO) e
 	switch submit.Withdrawal.Asset().ChainId {
 	case EthereumChainId:
 		return ethereum.VerifyAddress(submit.Withdrawal.Address)
+	case TronChainId:
+		return tron.VerifyAddress(submit.Withdrawal.Address)
 	}
 	return nil
 }
